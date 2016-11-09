@@ -555,7 +555,8 @@
                     </div>
 
                     <button type="submit" class="btn btn-success">Thêm</button>
-                    <button type="reset" class="btn btn-danger">Hủy bỏ</button>
+                    <button type="reset" class="btn btn-primary">Nhập lại</button>
+                    <a href="{!! route('admin.chi-tiet-dien-thoai.cancel',[$id_dt]) !!}" class="btn btn-danger">Hủy bỏ</a>
             <form>
 
     </div>

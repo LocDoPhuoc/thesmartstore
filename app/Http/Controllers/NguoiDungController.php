@@ -71,7 +71,7 @@ class NguoiDungController extends Controller
     	$user = User::where('id',$id)->get();
     	if ($user[0]->level == 1) {
             if ($user[0]->id != Auth::user()->id) {
-                return redirect('admin/users/list')->with(['flash_message'=>'Đây là tài khoản Super Admin, không được phép sửa !!!','status'=>'danger',]);
+                return redirect()->route('admin.users.getList')->with(['flash_message'=>'Đây là tài khoản Super Admin, không được phép sửa !!!','status'=>'danger',]);
             } else {
                 return view('admin.user.edit',compact('user'));
             }	
@@ -83,7 +83,7 @@ class NguoiDungController extends Controller
 	    	else {
 	    		if (Auth::user()->level == 3) {
 	    			if ($user[0]->level == 3 && $user[0]->id != Auth::user()->id) {
-	    				return redirect('admin/users/list')->with(['flash_message'=>'Bạn không có quyền sửa tài khoản này !!!','status'=>'danger',]);
+	    				return redirect()->route('admin.users.getList')->with(['flash_message'=>'Bạn không có quyền sửa tài khoản này !!!','status'=>'danger',]);
 	    			} else {
 	    				return view('admin.user.edit',compact('user'));
 	    			}
@@ -117,7 +117,7 @@ class NguoiDungController extends Controller
     	
 
     	if ($usr[0]->level == 1) {
-    		return redirect('admin/users/list')->with(['flash_message'=>'Đây là tài khoản Super Admin, không được phép sửa !!!','status'=>'danger',]);
+    		return redirect()->route('admin.users.getList')->with(['flash_message'=>'Đây là tài khoản Super Admin, không được phép sửa !!!','status'=>'danger',]);
     	} else {
     		if (Auth::user()->level == 1) {
     			DB::table('users')->where('id',$r->id)->update([
@@ -125,14 +125,12 @@ class NguoiDungController extends Controller
     				'password' => $pwd,
     				'level' => $level,
     			]);
-    			echo "sua het";	
-    			return redirect('admin/users/list')->with(['flash_message'=>'Thông tin tài khoản đã được sửa !!!','status'=>'success',]);	
-
-    			
+    			return redirect()->route('admin.users.getList')->with(['flash_message'=>'Thông tin tài khoản đã được sửa !!!','status'=>'success',]);	
+	
 	    	} else {
 	    		if (Auth::user()->level == 3) {
 	    			if ($usr[0]->level == 3 && $usr[0]->id != Auth::user()->id) {
-	    				return redirect('admin/users/list')->with(['flash_message'=>'Bạn không có quyền sửa tài khoản này !!!','status'=>'danger',]);
+	    				return redirect()->route('admin.users.getList')->with(['flash_message'=>'Bạn không có quyền sửa tài khoản này !!!','status'=>'danger',]);
 	    			} else {
 	    				DB::table('users')->where('id',$r->id)->update([
 		    				'name' => $r->name,
@@ -140,7 +138,7 @@ class NguoiDungController extends Controller
 		    				'level' => $level,
 		    			]);
 		    			echo "sua no va kahach";
-		    			return redirect('admin/users/list')->with(['flash_message'=>'Thông tin tài khoản đã được sửa !!!','status'=>'success',]);	
+		    			return redirect()->route('admin.users.getList')->with(['flash_message'=>'Thông tin tài khoản đã được sửa !!!','status'=>'success',]);	
 	    			}
 	    			
 	    		} 

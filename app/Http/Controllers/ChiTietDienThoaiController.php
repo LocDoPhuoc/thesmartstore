@@ -123,7 +123,7 @@ class ChiTietDienThoaiController extends Controller
 
 	    $chitiet->save();
 
-	return redirect()->route('admin.dien-thoai.getList')->with(['flash_message'=>'Thêm chi tiết cho điện thoại thành công !!!','status'=>'success',]);
+	return redirect()->route('admin.dien-thoai.getList')->with(['flash_message'=>'Điện thoại và thông tin cấu hình chi tiết đã được thêm thành công !!!','status'=>'success',]);
 
     }
 
@@ -238,5 +238,12 @@ class ChiTietDienThoaiController extends Controller
         ]);
 
         return redirect()->back()->with(['flash_message'=>'Chi tiết điện thoại đã được sửa thành công !!!','status'=>'success',]);
+    }
+
+    public function cancel($id_dt){
+        DB::table('hinh_anh_dien_thoais')->where('hinh_dt',$id_dt)->delete();
+        DB::table('gia_dien_thoais')->where('id_dt',$id_dt)->delete();
+        DB::table('dien_thoais')->where('id',$id_dt)->delete();
+        return redirect()->route('admin.dien-thoai.getList')->with(['flash_message'=>'Thêm điện thoại không thành công, vì bạn không thêm thông tin chi tiết cấu hình cho điện thoại, có thể xảy ra lỗi trong quá trình hiển thị !!!','status'=>'danger',]);
     }
 }

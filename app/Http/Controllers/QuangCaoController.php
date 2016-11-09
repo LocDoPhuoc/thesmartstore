@@ -40,7 +40,7 @@ class QuangCaoController extends Controller
     	return redirect()->route('admin.quang-cao.getList')->with(['flash_message'=>'Quảng cáo đã được thêm thành công !!!','status'=>'success',]);
     }
 
-    public function delete($id){
+    public function delete($id, Request $r){
     	$img = QuangCao::where('id',$id)->select('img')->get();
     	File::delete($img[0]->img);
     	DB::table('quang_caos')->where('id',$id)->delete();

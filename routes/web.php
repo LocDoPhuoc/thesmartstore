@@ -64,7 +64,7 @@ Route::group(['middleware'=>'auth', 'middleware' => 'admin'],function(){
 			Route::get('list',['as'=>'admin.hang-san-xuat.getList', 'uses'=>'HangSanXuatController@getList']);
 			Route::get('update/{id}',['as'=>'admin.hang-san-xuat.getUpdate', 'uses'=>'HangSanXuatController@getUpdate']);
 			Route::post('post-update',['as'=>'admin.hang-san-xuat.postUpdate', 'uses'=>'HangSanXuatController@postUpdate']);
-			Route::get('delete/{id}',['as'=>'admin.hang-san-xuat.delete', 'uses'=>'HangSanXuatController@delete']);
+			Route::post('delete/{id}',['as'=>'admin.hang-san-xuat.delete', 'uses'=>'HangSanXuatController@delete']);
 		});
 
 		Route::group(['prefix'=>'dien-thoai'], function(){
@@ -74,10 +74,11 @@ Route::group(['middleware'=>'auth', 'middleware' => 'admin'],function(){
 			Route::get('new-list',['as'=>'admin.dien-thoai.getNewList', 'uses'=>'DienThoaiController@getNewList']);
 			Route::get('list/het-hang',['as'=>'admin.dien-thoai.getHetHang', 'uses'=>'DienThoaiController@getHetHang']);
 			Route::get('list/da-ban',['as'=>'admin.dien-thoai.getDaBan', 'uses'=>'DienThoaiController@getDaBan']);
-			Route::get('delete/{id}',['as'=>'admin.dien-thoai.Delete', 'uses'=>'DienThoaiController@delete']);
+			Route::post('delete/{id}',['as'=>'admin.dien-thoai.delete', 'uses'=>'DienThoaiController@delete']);
 			Route::get('update/{id}',['as'=>'admin.dien-thoai.getUpdate', 'uses'=>'DienThoaiController@getUpdate']);
 			Route::post('update',['as'=>'admin.dien-thoai.postUpdate', 'uses'=>'DienThoaiController@postUpdate']);
 			Route::get('update/delete-img/{id_hinh}', ['as'=>'admin.dien-thoai.deleteImg', 'uses'=>'DienThoaiController@deleteImg']);
+
 		});
 
 		Route::group(['prefix'=>'chi-tiet-dien-thoai'], function(){
@@ -85,6 +86,7 @@ Route::group(['middleware'=>'auth', 'middleware' => 'admin'],function(){
 			Route::post('add',['as'=>'admin.chi-tiet-dien-thoai.postAdd', 'uses'=>'ChiTietDienThoaiController@postAdd']);
 			Route::get('update/{id_dt}',['as'=>'admin.chi-tiet-dien-thoai.getUpdate', 'uses'=>'ChiTietDienThoaiController@getUpdate']);
 			Route::post('update',['as'=>'admin.chi-tiet-dien-thoai.postUpdate', 'uses'=>'ChiTietDienThoaiController@postUpdate']);
+			Route::get('cancel/{id_dt}',['as'=>'admin.chi-tiet-dien-thoai.cancel', 'uses'=>'ChiTietDienThoaiController@cancel']);
 		});
 
 		Route::group(['prefix'=>'don-dat-hang'], function(){
@@ -98,7 +100,7 @@ Route::group(['middleware'=>'auth', 'middleware' => 'admin'],function(){
 		Route::group(['prefix'=>'users'], function(){
 			Route::get('list',['as'=>'admin.users.getList', 'uses'=>'NguoiDungController@getList']);
 			Route::get('new-list',['as'=>'admin.users.getNewList', 'uses'=>'NguoiDungController@getNewList']);
-			Route::get('delete/{id}',['as'=>'admin.users.delete', 'uses'=>'NguoiDungController@delete']);
+			Route::post('delete/{id}',['as'=>'admin.users.delete', 'uses'=>'NguoiDungController@delete']);
 			Route::get('add',['as'=>'admin.users.getAdd', 'uses'=>'NguoiDungController@getAdd']);
 			Route::post('post-add',['as'=>'admin.users.postAdd', 'uses'=>'NguoiDungController@postAdd']);
 			Route::get('update/{id}',['as'=>'admin.users.getUpdate', 'uses'=>'NguoiDungController@getUpdate']);
@@ -109,7 +111,7 @@ Route::group(['middleware'=>'auth', 'middleware' => 'admin'],function(){
 			Route::get('list',['as'=>'admin.quang-cao.getList', 'uses'=>'QuangCaoController@getList']);
 			Route::get('add',['as'=>'admin.quang-cao.getAdd', 'uses'=>'QuangCaoController@getAdd']);
 			Route::post('post-add',['as'=>'admin.quang-cao.postAdd', 'uses'=>'QuangCaoController@postAdd']);
-			Route::get('delete/{id}',['as'=>'admin.quang-cao.delete', 'uses'=>'QuangCaoController@delete']);
+			Route::post('delete/{id}',['as'=>'admin.quang-cao.delete', 'uses'=>'QuangCaoController@delete']);
 			Route::get('update/{id}',['as'=>'admin.quang-cao.getUpdate', 'uses'=>'QuangCaoController@getUpdate']);
 			Route::post('update',['as'=>'admin.quang-cao.postUpdate', 'uses'=>'QuangCaoController@postUpdate']);
 		});
@@ -122,6 +124,3 @@ Route::get('test', function() {
    return route('getAdminLogin')->with('test-roue');   
 });
 
-Route::error(function(){
-	echo "404";
-});

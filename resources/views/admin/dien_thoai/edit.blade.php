@@ -163,7 +163,8 @@
                     </div>
 
                     <button type="submit" class="btn btn-success">Sửa</button>
-                    <button type="reset" class="btn btn-danger">Hủy bỏ</button>
+                    <button type="reset" class="btn btn-primary">Nhập lại</button>
+                    <a href="{!! route('admin.dien-thoai.getList') !!}" class="btn btn-danger">Hủy bỏ</a>
             </form>
             @endforeach
     </div>

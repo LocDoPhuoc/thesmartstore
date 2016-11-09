@@ -117,7 +117,7 @@ class DienThoaiController extends Controller
         $gia->gia = $r->txtGia;
         $gia->save();
 
-        return redirect('/ploc1411_admin/chi-tiet-dien-thoai/add/'.$dt->id)->with(['flash_message'=>'Điện thoại đã được thêm thành công, vui lòng bổ sung chi tiết của điện thoại !!!','status'=>'success',]);
+        return redirect()->route('admin.chi-tiet-dien-thoai.getAdd',[$dt->id])->with(['flash_message'=>'Điện thoại đã được thêm thành công, vui lòng bổ sung chi tiết cấu hình của điện thoại !!!','status'=>'success',]);
     }
 
     /**
@@ -153,7 +153,7 @@ class DienThoaiController extends Controller
         return view('admin.dien_thoai.da-ban',compact('data'));
     }
 
-    public function delete($id){
+    public function delete($id, Request $r){
         DB::table('dien_thoais')->where('id',$id)->update(['trang_thai'=>2]);
         return redirect()->back()->with(['flash_message'=> 'Xoa thanh cong !!!','status'=>'success']);
     }

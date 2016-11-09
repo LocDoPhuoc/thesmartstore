@@ -48,7 +48,12 @@
                             echo Carbon\Carbon::createFromTimeStamp(strtotime($usr->created_at),'Asia/Ho_Chi_Minh')->diffForHumans();
                         ?>
                     </td>
-                    <td class="center"><i class="fa fa-trash-o fa-fw"></i><a href="{!! route('admin.users.delete',[$usr->id]) !!}"> Xóa</a></td>
+                    <td class="center">
+                        <form class="delete" action="{!! route('admin.users.delete',[$usr->id]) !!}" method="POST" style="display: inline;">
+                            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+                            <i class="fa fa-trash-o  fa-fw"></i><a type="submit" name="delete-select">Xóa</a>
+                        </form>
+                    </td>
                     <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{!! route('admin.users.getUpdate',[$usr->id]) !!}">Sửa</a></td>
                 </tr>
             @endforeach
@@ -56,8 +61,37 @@
              
     </table>
 
+    <div id="delete-confirm" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Xác nhận</h4>
+                </div>        
+                <div class="modal-body">Bạn muốn xóa người dùng này?</div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Xóa</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy bỏ</button>
+                </div>        
+            </div>
+        </div>
+    </div>
+
     @section('script')
         @parent
+        <script>
+            $(document).ready(function(){
+                // new WOW().init();
+                $('a[name="delete-select"]').on('click', function(e){
+                    var $form=$(this).closest('form'); 
+                    e.preventDefault();
+                    $('#delete-confirm').modal({ backdrop: 'static', keyboard: false })
+                        .one('click', '#delete', function() {
+                            $form.trigger('submit');
+                        });
+                });            
+            });
+        </script>
     @stop
 
 @endsection

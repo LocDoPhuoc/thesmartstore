@@ -32,7 +32,7 @@ class HangSanXuatController extends Controller
         }
         
     	$nsx->save();
-    	return redirect('/admin/hang-san-xuat/list')->with(['flash_message'=>'Thêm hãng sản xuất thành công !!!','status'=>'success',]);
+    	return redirect()->route('admin.hang-san-xuat.getList')->with(['flash_message'=>'Thêm hãng sản xuất thành công !!!','status'=>'success',]);
     }
 
     public function getUpdate($id){
@@ -57,10 +57,10 @@ class HangSanXuatController extends Controller
             'ten' => $r->ten,
             'trang_thai' => $trang_thai,
         ]);
-        return redirect('/admin/hang-san-xuat/list')->with(['flash_message'=>'Hãng sản xuất đã được sửa thành công !!!','status'=>'success',]);
+        return redirect()->route('admin.hang-san-xuat.getList')->with(['flash_message'=>'Hãng sản xuất đã được sửa thành công !!!','status'=>'success',]);
     }
 
-    public function delete($id){
+    public function delete($id, Request $r){
         $dt = DienThoai::where('id_nsx',$id)->where('trang_thai',1)->count();
         if ($dt == 0) {
                 $trang_thai = 2;
@@ -72,6 +72,6 @@ class HangSanXuatController extends Controller
         DB::table('hang_san_xuats')->where('id',$id)->update([
             'trang_thai' => $trang_thai,
         ]);
-        return redirect('/admin/hang-san-xuat/list')->with(['flash_message'=>'Hãng sản xuất đã được sửa thành công !!!','status'=>'success',]);
+        return redirect()->route('admin.hang-san-xuat.getList')->with(['flash_message'=>'Hãng sản xuất đã được sửa thành công !!!','status'=>'success',]);
     }
 }
